@@ -1,7 +1,16 @@
 <!-- here we write all the code we want to use inside the tags as a normal javascript file-->
 
 <script type="text/javascript">
-    var globalId = null
+
+function removeElementsByClass(className){
+    var elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+removeElementsByClass('media');
+
+var globalId = null
 
 const rotate = (x, y, sin, cos, reverse) => {
     return reverse ? {
