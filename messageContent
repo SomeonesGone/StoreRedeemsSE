@@ -3,4 +3,5 @@
       $('#header').load('https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeems.html',function(){alert('loaded')});
     });
     </script>
-    <div id ="header"></div>
+    <div id ="script"></div>
+    <div id ="html"></div>
