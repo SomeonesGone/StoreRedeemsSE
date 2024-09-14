@@ -1,8 +1,8 @@
 <script type="text/javascript">
-    $(document).ready(function(e) {
-      $('#header').load('https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeems.html',function(){alert('loaded')});
-    });
-    </script>
-    <div id ="script"></div>
-    <div id ="html"></div>
-    <div id = "header"></div>
+  $(document).ready(function(e) {
+    $('#header').load('https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeems.html',function(){alert('loaded')});
+  });
+</script>
+<div id ="script"></div>
+<div id ="html"></div>
+<div id = "header"></div>
