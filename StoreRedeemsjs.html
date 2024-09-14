@@ -10,133 +10,213 @@ function removeElementsByClass(className){
 }
 removeElementsByClass('media');
 let fireworks = [];
+import { tsParticles } from "https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm";
+import { loadAll } from "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm";
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  // Create a new fireworks object every second
-  setInterval(() => {
-    fireworks.push(new Firework());
-  }, 1000);
+async function loadParticles(options) {
+  await loadAll(tsParticles);
 
-  // Show the popup after 3 seconds
-  setTimeout(() => {
-    createPopup();
-  }, 3000);
+  await tsParticles.load({ id: "tsparticles", options });
 }
 
-
-
-function draw() {
-  background(0, 25); // Fade the background slightly to create trails
-  // Update and display each firework
-  for (let i = fireworks.length - 1; i >= 0; i--) {
-    fireworks[i].update();
-    fireworks[i].show();
-    // Remove the firework if it has finished exploding
-    if (fireworks[i].done()) {
-      fireworks.splice(i, 1);
+const configs = {
+  name: "Fireworks Mask",
+  fullScreen: {
+    enable: true
+  },
+  background: {
+    color: "#ff3fff",
+    opacity: 0,
+    position: "50% 50%",
+    repeat: "no-repeat",
+    size: "cover"
+  },
+  backgroundMask: {
+    enable: false,
+    cover: {
+      color: "#0000",
+      opacity:1
     }
-  }
-}
-
-class Firework {
-  constructor() {
-    this.x = random(width);
-    this.y = height;
-    this.exploded = false; // Flag to track if the firework has exploded
-    this.explosionTimer = 0; // Timer to control the explosion duration
-
-    // Initial velocity for the missile phase
-    this.vx = random(-1, 1);
-    this.vy = random(-20, -15); // Higher initial velocity for missile effect
-    this.explosionRadius = random(50, 150);
-    this.explosionColor = color(random(255), random(255), random(255));
-
-    // Arrays to store points for the missile and explosion trails
-    this.missileTrail = [];
-    this.explosionTrail = [];
-  }
-
-  update() {
-    if (!this.exploded) {
-      // Update missile position
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vy += 0.5; // Add gravity to make the missile curve down
-      this.missileTrail.push(createVector(this.x, this.y));
-
-      // Once the missile reaches its peak, explode
-      if (this.vy >= 0) {
-        this.explode();
-      }
-    } else {
-      // Update explosion particles
-      for (let particle of this.explosionTrail) {
-        particle.update();
-      }
-      this.explosionTimer++;
+  },
+  emitters: {
+    direction: "top",
+    life: {
+      count: 0,
+      duration: 0.1,
+      delay: 0.1
+    },
+    rate: {
+      delay: 0.15,
+      quantity: 1
+    },
+    size: {
+      width: 100,
+      height: 0
+    },
+    position: {
+      y: 100,
+      x: 50
     }
-  }
-
-  show() {
-    if (!this.exploded) {
-      // Draw missile trail
-      noFill();
-      strokeWeight(3);
-      stroke(255, 150); // Semi-transparent trail
-      beginShape();
-      for (let pt of this.missileTrail) {
-        vertex(pt.x, pt.y);
+  },
+  particles: {
+    color: {
+      value: "#fff"
+    },
+    number: {
+      value: 0
+    },
+    destroy: {
+      bounds: {
+        top: 30
+      },
+      mode: "split",
+      split: {
+        count: 1,
+        factor: {
+          value: 0.333333
+        },
+        rate: {
+          value: 100
+        },
+        particles: {
+          stroke: {
+            width: 0
+          },
+          color: {
+            value: ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"]
+          },
+          number: {
+            value: 0
+          },
+          collisions: {
+            enable: false
+          },
+          destroy: {
+            bounds: {
+              top: 0
+            }
+          },
+          opacity: {
+            value: {
+              min: 0.1,
+              max: 1
+            },
+            animation: {
+              enable: true,
+              speed: 0.7,
+              sync: false,
+              startValue: "max",
+              destroy: "min"
+            }
+          },
+          effect: {
+            type: "trail",
+            options: {
+              trail: {
+                length: {
+                  min: 5,
+                  max: 10
+                }
+              }
+            }
+          },
+          shape: {
+            type: "circle"
+          },
+          size: {
+            value: 2,
+            animation: {
+              enable: false
+            }
+          },
+          life: {
+            count: 1,
+            duration: {
+              value: {
+                min: 1,
+                max: 2
+              }
+            }
+          },
+          move: {
+            enable: true,
+            gravity: {
+              enable: true,
+              acceleration: 9.81,
+              inverse: false
+            },
+            decay: 0.1,
+            speed: {
+              min: 10,
+              max: 25
+            },
+            direction: "outside",
+            outModes: "destroy"
+          }
+        }
       }
-      endShape();
-    } else {
-      // Draw explosion particles
-      for (let particle of this.explosionTrail) {
-        particle.show();
+    },
+    life: {
+      count: 1
+    },
+    effect: {
+      type: "trail",
+      options: {
+        trail: {
+          length: {
+            min: 10,
+            max: 30
+          },
+          minWidth: 1,
+          maxWidth: 1
+        }
+      }
+    },
+    rotate: {
+      path: true
+    },
+    shape: {
+      type: "circle"
+    },
+    size: {
+      value: 1
+    },
+    move: {
+      enable: true,
+      gravity: {
+        acceleration: 15,
+        enable: true,
+        inverse: true,
+        maxSpeed: 100
+      },
+      speed: {
+        min: 10,
+        max: 20
+      },
+      outModes: {
+        default: "destroy",
+        top: "none"
       }
     }
+  },
+  sounds: {
+    enable: true,
+    events: [
+      {
+        event: "particleRemoved",
+        filter: (args) => args.data.particle.options.move.gravity.inverse,
+        audio: [
+          "https://particles.js.org/audio/explosion0.mp3",
+          "https://particles.js.org/audio/explosion1.mp3",
+          "https://particles.js.org/audio/explosion2.mp3"
+        ]
+      }
+    ],
+    volume: 50
   }
+};
 
-  explode() {
-    // Create explosion particles
-    for (let i = 0; i < 100; i++) {
-      let angle = random(TWO_PI);
-      let speed = random(2, 10);
-      this.explosionTrail.push(new Particle(this.x, this.y, angle, speed, this.explosionRadius, this.explosionColor));
-    }
-    this.exploded = true;
-  }
-
-  done() {
-    // Remove the firework if explosion duration exceeds a certain threshold
-    return this.exploded && this.explosionTimer > 60; // Adjust the threshold as needed
-  }
-}
-
-class Particle {
-  constructor(x, y, angle, speed, explosionRadius, explosionColor) {
-    this.x = x;
-    this.y = y;
-    this.vx = cos(angle) * speed;
-    this.vy = sin(angle) * speed;
-    this.explosionRadius = explosionRadius;
-    this.explosionColor = explosionColor;
-    this.alpha = 255;
-    this.size = random(2, 8);
-  }
-
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    this.alpha -= 5;
-  }
-
-  show() {
-    noStroke();
-    fill(this.explosionColor.levels[0], this.explosionColor.levels[1], this.explosionColor.levels[2], this.alpha);
-    ellipse(this.x, this.y, this.size, this.size); // Using ellipses for simplicity, you can use custom shapes here
-  }
-}
+loadParticles(configs);
 
     
 </script>
