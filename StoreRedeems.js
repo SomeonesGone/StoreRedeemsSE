@@ -1,2 +1,2 @@
-var elem = document.getElementById("id1");
+var elem = document.getElementById("header");
 elem.innerHTML = "Fuck this";
