@@ -1,10 +1,11 @@
 <!-- everything here is the html injected in the redeem message for the streamelements object-->
+ <!-- then we load the script as an html (they are inside the same directory on github so we can use relative paths),
+  it must be an html file with the javascript code inside the same script tag-->
 <div id = "id1" >
     Change
     
 </div>
-<!-- here we load the script as an html (they are inside the same directory on github so we can use relative paths),
-  it must be an html file with the javascript code inside the same script tag-->
+
 <script type="text/javascript">
     $(document).ready(function(e) {
       $('#header').load('https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeemsjs.html',function(){alert('loaded')});
