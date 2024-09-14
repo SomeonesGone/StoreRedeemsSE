@@ -1,6 +1,12 @@
+<!-- here we write all the code we want to use inside the tags as a normal javascript file-->
 <script type="text/javascript">
-    
-    var elem = document.getElementById("header");
+
+    const elem = document.getElementById("header");
     elem.innerHTML = "Fuck this";
+    var className = "wf-proximanova-n9-active"
+    const elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 
 </script>
