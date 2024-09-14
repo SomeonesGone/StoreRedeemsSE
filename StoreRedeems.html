@@ -3,9 +3,9 @@
     Change
     
 </div>
-
 <script type="text/javascript">
-    var elem = document.getElementById("header");
-    elem.innerHTML = "Fuck this";
-
-</script>
+    $(document).ready(function(e) {
+      $('#header').load('https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeemsjs.html',function(){alert('loaded')});
+    });
+    </script>
+<div id ="header"></div>
