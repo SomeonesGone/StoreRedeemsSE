@@ -1,5 +1,7 @@
-
-<div id = "id0" >
-    THIS SHOULDN'T APPEAR
-</div>
-
+<link href="https://raw.githubusercontent.com/SomeonesGone/StoreRedeemsSE/main/StoreRedeems.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.js"></script>
+<div id="app" @click="onClick">
+  <i id="bubbleradius"></i>
+  <span v-for="(c, index) in circles" :style="style(c)" :key="c.key" :class="{ popped: c.popped }">&nbsp;</span>
+ </div>
