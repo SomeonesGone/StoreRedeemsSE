@@ -1,5 +1,13 @@
 <!-- here we write all the code we want to use inside the tags as a normal javascript file-->
 <script type="text/javascript">
+    function removeElementsByClass(className){
+    let elements = document.getElementsByClassName(className);
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+}
     var elem = document.getElementById("id0");
     elem.innerHTML = "Should appear id0";
+
+    removeElementsByClass('media');
 </script>
