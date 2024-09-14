@@ -1,5 +1,9 @@
 <!-- here we write all the code we want to use inside the tags as a normal javascript file-->
 <script type="text/javascript">
-    var elem = document.getElementById("header");
-    elem.innerHTML = "Fuck this";
+    var elem = document.getElementById("id0");
+    elem.innerHTML = "Should appear id0";
+    var elements = document.getElementsByClassName("media");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 </script>
