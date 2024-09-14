@@ -16,7 +16,7 @@ const rotate = (x, y, sin, cos, reverse) => {
 const flatten = arr => arr.reduce((a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), [])
 
 var app = new Vue({
-	el: "#app",
+	el: "#appcirc",
 	data () {
 		return {
 			circles: [],
