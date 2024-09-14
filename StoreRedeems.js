@@ -1,2 +1,2 @@
-var elem = document.getElementById("change");
+const elem = document.getElementById("change");
 elem.innerHTML = "Fuck this";
